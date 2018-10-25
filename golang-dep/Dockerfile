@@ -15,7 +15,5 @@ RUN curl -fL -o /usr/local/bin/dep https://github.com/golang/dep/releases/downlo
  && chmod +x /usr/local/bin/dep \
  && dep version
 
-ENTRYPOINT ["/usr/local/bin/dep"]
-
-CMD ["--help"]
+CMD bash
 

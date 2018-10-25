@@ -4,8 +4,8 @@ LABEL "name"="Helm Action"
 LABEL "maintainer"="Stefan Prodan <support@gweave.works>"
 LABEL "version"="1.0.0"
 
-LABEL "com.github.actions.icon"="tag"
-LABEL "com.github.actions.color"="blue"
+LABEL "com.github.actions.icon"="terminal"
+LABEL "com.github.actions.color"="gray-dark"
 LABEL "com.github.actions.name"="Helm"
 LABEL "com.github.actions.description"="This is an Action to run Helm commands."
 

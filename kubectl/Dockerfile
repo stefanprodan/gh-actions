@@ -15,4 +15,4 @@ RUN apt-get update && apt-get -y --no-install-recommends install curl \
     && curl -LO https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl \
     && mv ./kubectl /usr/local/bin/kubectl && chmod +x /usr/local/bin/kubectl
 
-ENTRYPOINT ["bash"]
+ENTRYPOINT bash

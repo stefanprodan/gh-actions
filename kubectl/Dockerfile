@@ -1,4 +1,4 @@
-FROM alpine:3.8
+FROM gcr.io/cloud-builders/gcloud-slim@sha256:4eb42e6c93d163f38992cccc0fa56abd5c9d606c4c36ccf2049076a2a9713a83
 
 LABEL "name"="kubectl action"
 LABEL "maintainer"="Stefan Prodan <support@gweave.works>"
@@ -11,8 +11,7 @@ LABEL "com.github.actions.description"="This is an Action to run kubectl command
 
 ENV KUBECTL_VERSION="v1.11.3"
 
-RUN apk add --no-cache ca-certificates bash git curl \
-    && wget -q https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl -O /usr/local/bin/kubectl \
+RUN && wget -q https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl -O /usr/local/bin/kubectl \
     && chmod +x /usr/local/bin/kubectl
 
 CMD bash

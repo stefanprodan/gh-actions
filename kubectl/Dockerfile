@@ -11,7 +11,8 @@ LABEL "com.github.actions.description"="This is an Action to run kubectl command
 
 ENV KUBECTL_VERSION="v1.11.3"
 
-RUN wget -q https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl -O /usr/local/bin/kubectl \
+RUN apt-get -y --no-install-recommends install wget \
+    && wget -q https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl -O /usr/local/bin/kubectl \
     && chmod +x /usr/local/bin/kubectl
 
 CMD bash

@@ -12,11 +12,12 @@ LABEL "com.github.actions.description"="This is an Action to run Helm commands."
 ENV KUBECTL_VERSION="v1.11.3"
 ENV HELM_VERSION="v2.11.0"
 
-RUN apt-get -y --no-install-recommends install wget \
-    && wget -q https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl -O /usr/local/bin/kubectl \
-    && chmod +x /usr/local/bin/kubectl \
-    && wget -q https://storage.googleapis.com/kubernetes-helm/helm-${HELM_VERSION}-linux-amd64.tar.gz -O - | tar -xzO linux-amd64/helm > /usr/local/bin/helm \
-    && chmod +x /usr/local/bin/helm \
+RUN apt-get update && apt-get -y --no-install-recommends install curl \
+    && curl -LO https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl \
+    && mv ./kubectl /usr/local/bin/kubectl && chmod +x /usr/local/bin/kubectl \
+    && curl -Lo /tmp/helm-linux-amd64.tar.gz https://storage.googleapis.com/kubernetes-helm/helm-${HELM_VERSION}-linux-amd64.tar.gz \
+    && tar -xvf /tmp/helm-linux-amd64.tar.gz -C /tmp/ \
+    && chmod +x /tmp/linux-amd64/helm && mv /tmp/linux-amd64/helm /usr/local/bin/ \
     && helm init --client-only \
     && helm plugin install https://github.com/mbenabda/helm-local-chart-version
 

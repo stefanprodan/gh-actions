@@ -1,4 +1,4 @@
-FROM gcr.io/cloud-builders/gcloud-slim@sha256:4eb42e6c93d163f38992cccc0fa56abd5c9d606c4c36ccf2049076a2a9713a83
+FROM gcr.io/cloud-builders/kubectl
 
 LABEL "name"="Helm Action"
 LABEL "maintainer"="Stefan Prodan <support@gweave.works>"
@@ -13,13 +13,10 @@ ENV KUBECTL_VERSION="v1.11.3"
 ENV HELM_VERSION="v2.11.0"
 
 RUN apt-get update && apt-get -y --no-install-recommends install curl \
-    && curl -LO https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl \
-    && mv ./kubectl /usr/local/bin/kubectl && chmod +x /usr/local/bin/kubectl \
     && curl -Lo /tmp/helm-linux-amd64.tar.gz https://storage.googleapis.com/kubernetes-helm/helm-${HELM_VERSION}-linux-amd64.tar.gz \
     && tar -xvf /tmp/helm-linux-amd64.tar.gz -C /tmp/ \
     && chmod +x /tmp/linux-amd64/helm && mv /tmp/linux-amd64/helm /usr/local/bin/ \
     && helm init --client-only \
     && helm plugin install https://github.com/mbenabda/helm-local-chart-version
 
-ENTRYPOINT bash
 

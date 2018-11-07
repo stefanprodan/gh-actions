@@ -9,10 +9,11 @@ LABEL "com.github.actions.color"="gray-dark"
 LABEL "com.github.actions.name"="kubectl"
 LABEL "com.github.actions.description"="This is an Action to run kubectl commands."
 
-ENV KUBECTL_VERSION="v1.11.3"
+ENV KUBECTL_VERSION="v1.11.4"
 
 RUN apt-get update && apt-get -y --no-install-recommends install curl \
     && curl -LO https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl \
     && mv ./kubectl /usr/local/bin/kubectl && chmod +x /usr/local/bin/kubectl
 
-ENTRYPOINT bash
+COPY entrypoint.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]

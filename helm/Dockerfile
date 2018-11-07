@@ -19,4 +19,6 @@ RUN apt-get update && apt-get -y --no-install-recommends install curl \
     && helm init --client-only \
     && helm plugin install https://github.com/mbenabda/helm-local-chart-version
 
+COPY entrypoint.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
 

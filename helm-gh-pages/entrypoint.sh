@@ -38,7 +38,7 @@ TAG=$(echo ${GITHUB_REF} | rev | cut -d/ -f1 | rev)
 if [[ "${GITHUB_REF}" == "refs/tags"* ]]; then
     echo "Starting action for tag ${TAG}";
 else
-    echo "Skipping action because push does not refer to a git tag!" && exit 0;
+    echo "Skipping action because push does not refer to a git tag!" && exit 78;
 fi
 
 TAG_FILTER=$3
@@ -46,7 +46,7 @@ if [[ -z $3 ]]; then
   echo "Tag filter not specified";
 else
     if [[ ${TAG} != *${TAG_FILTER}* ]]; then
-    echo "Tag ${TAG} does not match filter ${TAG_FILTER}" && exit 0;
+    echo "Tag ${TAG} does not match filter ${TAG_FILTER}" && exit 78;
     fi
 fi
 

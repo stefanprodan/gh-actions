@@ -52,14 +52,14 @@ Assuming your GitHub repository has a Helm chart named `app` located at `chart/a
 
 When you push the tag, GitHub will start the workflow and the helm-gh-pages will do the following:
 
-* checks out the `v1.0.1` tag
+* checks out the `v1.0.0` tag
 * validates the chart by running Helm lint
 * packages the chart to `/github/home/pkg/app-1.0.0.tgz`
 * checks out the `gh-pages` branch
 * copies the `app-1.0.0.tgz` from `/github/home` to `/github/workspace`
 * updates the Helm repository index using the GitHub pages URL
 * commits the chart package and the Helm repository index
-* pushed the changes to `gh-pages`
+* pushed the changes to `gh-pages` using the GitHub token secret
 
 In couple of seconds GitHub will publish the change to GitHub Pages and your chart v1.0.0 will be available for download.
 

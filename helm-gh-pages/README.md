@@ -2,14 +2,14 @@
 
 This is a GitHub Action that publishes Helm charts to a Helm repository hosted on GitHub Pages.
 
-The Helm gh-pages actions takes 3 arguments:
-1. chart path (required)
-2. GitHub Pages HTTPS URL (required)
+The Helm gh-pages action takes 3 arguments:
+1. Helm chart path (required)
+2. GitHub Pages URL (required)
 3. Git tag filter (optional)
 
 In order to use this action your Git repository should have a `gh-pages` branch published on GitHub Pages.
 
-### Usage
+### Workflow
 
 Package and push the Helm chart located at `chart/app` to the `gh-pages` branch on Git tag:
 
@@ -36,7 +36,7 @@ action "Helm gh-pages" {
 }
 ```
 
-### Workflow
+### Usage
 
 Assuming your GitHub repository has a Helm chart named `app` located at `chart/app` the release procedure could be:
 
@@ -50,13 +50,16 @@ Assuming your GitHub repository has a Helm chart named `app` located at `chart/a
 > git push origin v1.0.0
 ``` 
 
-When you push the new tag, GitHub will start the workflow and the helm-gh-pages will do the following:
+When you push the tag, GitHub will start the workflow and the helm-gh-pages will do the following:
 
 * checks out the `v1.0.1` tag
-* validates the chart by running `helm lint chart/app`
+* validates the chart by running Helm lint
 * packages the chart to `/github/home/pkg/app-1.0.0.tgz`
 * checks out the `gh-pages` branch
-* copies the `app-1.0.0.tgz` from github home to github workspace
+* copies the `app-1.0.0.tgz` from `/github/home` to `/github/workspace`
 * updates the Helm repository index using the GitHub pages URL
-* commits the chart package and the updated `index.yaml`
+* commits the chart package and the Helm repository index
 * pushed the changes to `gh-pages`
+
+In couple of seconds GitHub will publish the change to GitHub Pages and your chart v1.0.0 will be available for download.
+

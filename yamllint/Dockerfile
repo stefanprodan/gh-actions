@@ -1,4 +1,4 @@
-FROM python:3.7-alpine3.8
+FROM python:3.7
 
 LABEL "name"="yamllint Action"
 LABEL "maintainer"="Stefan Prodan <support@gweave.works>"
